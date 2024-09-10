@@ -2,7 +2,7 @@
 #include "resource_dir.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
-
+#include "UIController.hpp"
 #include "ParticleController.hpp"
 
 int main()
@@ -15,7 +15,7 @@ int main()
 
     ParticleController Engine;
     Engine.Populate(2000);
-    
+    UIController UI;
 
     while (!WindowShouldClose())
     {
@@ -24,6 +24,7 @@ int main()
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
             Engine.Draw();
+            UI.show_fps();
             if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
                 Engine.show_density();
             }

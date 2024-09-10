@@ -7,26 +7,7 @@
 class ParticleController
 {
 private:
-    std::vector<Particle> arr; 
-public:
-    float smoothing_radius = 50;
-    ParticleController() {
-        SetRandomSeed(time(NULL));
-    }
-   
-    void Populate(int n) {
-        for (int i = 0; i < n; i++) {
-            arr.push_back(Particle( Vector2{ (float)GetRandomValue(8,1912), (float)GetRandomValue(8,1072) } ,4));
-        }
-    } 
-
-    void Draw() {
-        for (Particle i: arr) {
-            i.Draw();
-        }
-    }
-
-    float magnitude(Vector2 p1 , Vector2 p2) {
+float magnitude(Vector2 p1 , Vector2 p2) {
         return std::sqrt(std::pow((p1.x - p2.x) , 2) + std::pow((p1.y - p2.y),  2));
     }
 
@@ -55,6 +36,26 @@ public:
 
     }
 
+    std::vector<Particle> arr; 
+public:
+    float smoothing_radius = 50;
+    ParticleController() {
+        SetRandomSeed(time(NULL));
+    }
+   
+    void Populate(int n) {
+        for (int i = 0; i < n; i++) {
+            arr.push_back(Particle( Vector2{ (float)GetRandomValue(8,1912), (float)GetRandomValue(8,1072) } ,4));
+        }
+    } 
+
+    void Draw() {
+        for (Particle i: arr) {
+            i.Draw();
+        }
+    }
+
+    
     void show_density() {
         Vector2 pos = GetMousePosition();
         float dent = calculate_density(pos);
