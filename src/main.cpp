@@ -2,7 +2,6 @@
 #include "resource_dir.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
-#include "UIController.hpp"
 #include "ParticleController.hpp"
 
 int main()
@@ -14,26 +13,35 @@ int main()
     SetTargetFPS(120);
 
     ParticleController Engine;
-    Engine.Populate(2000);
-    UIController UI;
+    Engine.Populate(1500);
 
     while (!WindowShouldClose())
     {
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-            Engine.Draw();
-            UI.show_fps();
-            if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                Engine.show_density();
-            }
-            if(IsKeyPressed(KEY_KP_ADD)){
-                Engine.smoothing_radius += 10;
-            }
-            if(IsKeyPressed(KEY_MINUS)) {
+        ClearBackground(BLACK);
+        Engine.Draw();
+        Engine.Update();
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            Engine.show_density();
+        }
+        if (IsKeyPressed(KEY_KP_ADD))
+        {
+            Engine.smoothing_radius += 10;
+        }
+        if (IsKeyPressed(KEY_KP_SUBTRACT))
+        {   
+            if (Engine.smoothing_radius != 0)
                 Engine.smoothing_radius -= 10;
-            }
+
+        }
+        if (IsKeyPressed(KEY_R))
+        {
+            Engine.Reset();
+        }
+
         EndDrawing();
     }
 

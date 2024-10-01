@@ -1,15 +1,23 @@
-#pragma once 
+#pragma once
 #include "raylib.h"
+#pragma endregion
 
-class UIController {
+class UIController
+{
     int fps;
 
 public:
-    UIController (){}
+    UIController() {}
 
-    void show_fps() {
+    void show_fps()
+    {
         fps = GetFPS();
-        DrawText(TextFormat("%i", fps),20,20, 20, RAYWHITE);
+        DrawText(TextFormat("%i", fps), 20, 20, 20, GREEN);
     }
 
+    void draw_variables(float smoothing_radius)
+    {
+        
+        DrawText(TextFormat("Smoothing Radius: %.0f", smoothing_radius), 20, 60, 20, GREEN);
+    }
 };
